@@ -1,0 +1,39 @@
+﻿@model WebMarket.Models.Category
+@{
+}
+
+
+
+<div class="container">
+    <div class="card mx-auto shadow w-75">
+        <div class="card-header">
+            <h1 class="text-info w-75">افزودن ترتیب جدید</h1>
+        </div>
+        <form method="post">
+            <div class="card-body">
+                <div class="row p-1">
+                    <div class="col-sm-3">
+                        <h4 class="text-end" >نام</h4>
+                    </div>
+                    <div class="col-sm-9">
+                        <input type="text" Asp-for="Name" class="form-control text-center" placeholder="لطفا نام را وارد کنید"/>
+                    </div>
+                </div>
+                <div class="row p-1">
+                    <div class="col-sm-3">
+                        <h4 class="text-end">ترتیب</h4>
+                    </div>
+                    <div class="col-sm-9">
+                        <input type="text" asp-for="DisplayOrder" class="form-control text-center" placeholder="لطفا ترتیب را وارد کنید"/>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <input type="submit" class="btn btn-outline-danger" value="حذف"/>
+                <a class="text-warning" asp-area="Admin" asp-controller="Category" asp-action="Index"> برگشت به لیست</a>
+            </div>
+
+        </form>
+       
+    </div>
+</div>

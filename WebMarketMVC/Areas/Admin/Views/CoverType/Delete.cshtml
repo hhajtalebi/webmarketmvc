@@ -1,0 +1,43 @@
+﻿@model WebMarket.Models.CoverType
+@{
+}
+
+
+
+<div class="container">
+    <div class="card mx-auto shadow w-75">
+        <div class="card-header bg-dark">
+            <h5 class="text-danger w-75">آیا از حذف {@Model.Name} اطمینان داردی؟ </h5>
+        </div>
+        <form method="post">
+            <input type="hidden" asp-for="Id" />
+            <div class="card-body">
+                <div class="row p-1">
+                    <div class="col-sm-3">
+                        <label asp-for="Name" class="text-end"></label>
+                    </div>
+                    <div class="col-sm-9">
+                        <input type="text" asp-for="Name" class="form-control text-center disabled" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="card-footer bg-dark">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <input type="submit" class="btn btn-outline-danger form-control" value="حذف" />
+
+                    </div>
+                    <div class="col-sm-9 text-end">
+                        <a class="text-white " asp-area="Admin" asp-controller="CoverType" asp-action="Index"> برگشت به لیست</a>
+
+
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</div>

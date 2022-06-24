@@ -1,0 +1,44 @@
+﻿@model WebMarket.Models.Category
+@{
+}
+
+<div class="container">
+    <div class="card mx-auto shadow w-75">
+        <div class="card-header">
+            <h1 class="text-info w-75">ویرایش ترتیب جدید</h1>
+        </div>
+        <form method="post">
+            <input type="hidden" asp-for="Id"/>
+            <div class="card-body">
+                <div class="row p-1">
+                    <div class="col-sm-3">
+                        <label class="text-end">نام</label>
+                    </div>
+                    <div class="col-sm-9">
+                        <input type="text" Asp-for="Name" class="form-control text-center" placeholder="لطفا نام را وارد کنید"/>
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row p-1">
+                    <div class="col-sm-3">
+                        <label class="text-end">ترتیب</label>
+                    </div>
+                    <div class="col-sm-9">
+                        <input type="number" asp-for="DisplayOrder" class="form-control text-center" placeholder="لطفا ترتیب را وارد کنید"/>
+                        <span asp-validation-for="DisplayOrder" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <input type="submit" class="btn btn-outline-primary" value="ثبت"/>
+                <a class="text-warning" asp-area="Admin" asp-controller="Category" asp-action="Index"> برگشت به لیست</a>
+            </div>
+
+        </form>
+       
+    </div>
+</div>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
+

@@ -1,0 +1,51 @@
+﻿@model IEnumerable<WebMarket.Models.CoverType>
+@{
+}
+<partial name="_Notofication" />
+<div class="container">
+    <div class="card row  mx-auto shadow">
+        <div class="card-header bg-dark">
+            <div class="row">
+                <div class="col-sm-6">
+                    <label class="text-white">نمایش تایپ ها</label>
+
+                </div>
+                <div class="col-sm-6 text-end">
+                    <a class="btn btn-outline-primary rounded-3 text-warning" asp-area="Admin" asp-controller="CoverType" asp-action="Create">افزودن تایپ جدید</a>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="card-body">
+            <table class="table table-striped border-1">
+                <thead>
+                    <tr>
+                        <th class="text-center">
+                            نام
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var Item in Model)
+                    {
+                        <tr>
+                            <td class="text-center">
+                                @Item.Name
+                            </td>
+                            <td class="text-center">
+                                <a class="text-dark btn btn-warning" asp-area="Admin" asp-controller="CoverType" asp-action="Edit" asp-route-Id="@Item.Id">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a class="text-dark btn btn-danger " asp-area="Admin" asp-controller="CoverType" asp-action="Delete" asp-route-id="@Item.Id">
+                                    <i class="fas fa-delete-left"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</div>

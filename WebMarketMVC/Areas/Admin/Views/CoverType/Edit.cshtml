@@ -1,0 +1,48 @@
+﻿@model WebMarket.Models.CoverType
+@{
+}
+
+<div class="container">
+    <div class="card mx-auto shadow w-75">
+        <div class="card-header bg-dark">
+            <h3 class="text-info w-75">ویرایش کاور </h3>
+        </div>
+        <form method="post">
+            <input type="hidden" asp-for="Id" />
+            <div class="card-body">
+                <div class="row p-1">
+                    <div class="col-sm-3">
+                        <label asp-for="Name" class="text-end"></label>
+                    </div>
+                    <div class="col-sm-9">
+                        <input type="text" Asp-for="Name" class="form-control text-center" placeholder="لطفا نام را وارد کنید" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="card-footer bg-dark">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <input type="submit" class="btn btn-outline-primary text-white form-control" value="بروزرسانی"/>
+
+                    </div>
+                    <div class="col-sm-4"></div>
+                    <div class="col-sm-4 text-end">
+                        <a class="text-warning" asp-area="Admin" asp-controller="CoverType" asp-action="Index"> برگشت به لیست</a>
+
+                    </div>
+                </div>
+                
+            </div>
+
+
+        </form>
+
+    </div>
+</div>
+@section Scripts
+{
+<partial name="_ValidationScriptsPartial" />
+
+}

@@ -1,0 +1,201 @@
+﻿@model WebMarket.Models.ViewModel.ProductVM
+@{
+    ViewData["Title"] = "Upsert";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container">
+    <div class="card mx-auto shadow ">
+        <div class="card-header bg-dark">
+            <h3 class="text-info text-center text-white">@(Model.Product.Id!=0 ? "ویرایس" : "ایجاد" )  محصولات </h3>
+        </div>
+        <form method="post" asp-action="Upsert" enctype="multipart/form-data">
+            <div class="card-body mt-0">
+                <input type="hidden" asp-for="Product.Id"/>
+             
+                <input asp-for="Product.ImgeUrl" hidden />
+                <div class="row p-2 mt-0 border-2 bg-dark bg-opacity-25">
+                    <div class="col-sm-2 text-end">
+                        <label asp-for="Product.CategoryId" class="text-white mt-1"></label>
+                    </div>
+                    <div class="col-sm-4">
+                        <select class="form-select form-control text-center" asp-for="Product.CategoryId" asp-items="@Model.CategorySelectList">
+                            <option disabled="disabled" selected="selected">---انتخاب دسته---</option>
+                        </select>
+                      
+                    </div>
+
+                    <div class="col-sm-2 text-end">
+                        <label asp-for="Product.CoverTypeId" class="text-white mt-1"></label>
+                    </div>
+                    <div class="col-sm-4">
+                        <select class="form-select form-control text-center" asp-for="Product.CoverTypeId" asp-items="@Model.CoverTypeSelectList">
+                            <option disabled="disabled" selected="selected">---انتخاب کاور---</option>
+                        </select>
+                       
+                    </div>
+
+                </div>
+
+
+
+
+
+
+                <div class="row p-1">
+                    <div class="col-sm-2 mt-1 text-end">
+                        <label asp-for="Product.Title" class="text-end"></label>
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="text" asp-for="Product.Title" class="form-control text-center" placeholder="لطفا نام را وارد کنید"/>
+                        <span asp-validation-for="Product.Title" class="text-danger"></span>
+                    </div>
+                    <div class="col-sm-2 mt-1 text-end">
+                        <label asp-for="Product.ISBN" class="text-end"></label>
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="text" asp-for="Product.ISBN" class="form-control text-center" placeholder="لطفا شابک را وارد کنید"/>
+                        <span asp-validation-for="Product.ISBN" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+
+                <div class="row p-1">
+                    <div class="col-sm-2 mt-1 text-end">
+                        <label asp-for="Product.Author" class="text-end"></label>
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="text" asp-for="Product.Author" class="form-control text-center" placeholder="لطفا نام نویسنده را وارد کنید"/>
+                        <span asp-validation-for="Product.Author" class="text-danger"></span>
+                    </div>
+                    <div class="col-sm-2 mt-1 text-end">
+                        <label asp-for="Product.Price" class="text-end"></label>
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="text" asp-for="Product.Price" class="form-control text-center" placeholder="لطفا قیمت را وارد کنید"/>
+                        <span asp-validation-for="Product.Price" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+
+                <div class="row p-1">
+                    <div class="col-sm-2 mt-1 text-end">
+                        <label asp-for="Product.Price50" class="text-end"></label>
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="text" asp-for="Product.Price50" class="form-control text-center" placeholder="لطفا قیمت کمتر از 50  را وارد کنید"/>
+                        <span asp-validation-for="Product.Price50" class="text-danger"></span>
+                    </div>
+                    <div class="col-sm-2 mt-1 text-end">
+                        <label asp-for="Product.Price100" class="text-end"></label>
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="text" asp-for="Product.Price100" class="form-control text-center" placeholder="لطفا قیمت کمتز از 100 را وارد کنید"/>
+                        <span asp-validation-for="Product.Price100" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+
+                <div class="row p-1">
+                    <div class="col-sm-2 mt-1 text-end">
+                        <label asp-for="Product.ImgeUrl" class="text-end"></label>
+                    </div>
+                    <div class="col-sm-4">
+                        <input id="UplodImg" type="file" name="file"  class="form-control" placeholder="لطفا  تصویر را وارد کنید"/>
+                        <span asp-validation-for="Product.ImgeUrl" class="text-danger"></span>
+                    </div>
+                    <div class="col-sm-2 mt-1 text-end">
+                        <label asp-for="Product.ImageTitle" class="text-end"></label>
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="text" asp-for="Product.ImageTitle" class="form-control text-center" placeholder="لطفا عنوان تصویر را وارد کنید"/>
+                        <span asp-validation-for="Product.ImageTitle" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+
+                <div class="row p-1">
+                    <div class="col-sm-2 mt-1 text-end">
+                        <label asp-for="Product.ImageAlt" class="text-end"></label>
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="text" asp-for="Product.ImageAlt" class="form-control text-center" placeholder="لطفا راهمنای تصویر را وارد کنید"/>
+                        <span asp-validation-for="Product.ImageAlt" class="text-danger"></span>
+                    </div>
+                    <div class="col-sm-2 mt-1 text-end">
+                        <label asp-for="Product.ShortDescription" class="text-end"></label>
+                    </div>
+                    <div class="col-sm-4">
+                        <textarea rows="3" type="text" asp-for="Product.ShortDescription" class="form-control text-center" placeholder="لطفا توضیحات کوتاه را وارد کنید"></textarea>
+                        <span asp-validation-for="Product.ShortDescription" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+
+                <div class="row p-1">
+                    <div class="col-sm-2 text-end">
+                        <label asp-for="Product.Description" class="text-end"></label>
+                    </div>
+                    <div class="col-sm-10">
+                        <textarea rows="10"  type="text" asp-for="Product.Description" class="form-control text-center" placeholder="لطفا توضیحات را وارد کنید"></textarea>
+                        <span asp-validation-for="Product.Description" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="card-footer bg-dark">
+                <div class="row">
+                    @if (Model.Product.Id != 0)
+                    {
+                        <div class="col-sm-4">
+                            <input type="submit" class="btn btn-outline-primary text-white form-control" value="بروزرسانی"/>
+
+                        </div>
+                    }
+                    else
+                    {
+                        
+                        <div class="col-sm-4">
+                            <input type="submit" onclick="return  ValidationImg()" class="btn btn-outline-primary text-white form-control" value="ثبت"/>
+
+                        </div>
+                    }
+                    
+                    <div class="col-sm-4"></div>
+                    <div class="col-sm-4 text-end">
+                        <a class="text-warning" asp-area="Admin" asp-controller="Product" asp-action="Index"> برگشت به لیست</a>
+
+                    </div>
+                </div>
+                
+            </div>
+
+        </form>
+       
+    </div>
+</div>
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial"/>
+    <script>
+        function ValidationImg() {
+            if (document.getElementById("UplodImg").value === "") {
+                Swal.fire({
+                    icon: 'خطا',
+                    title: 'اوهههه......',
+                    text: 'شما تصویری انتخاب نکرده اید '
+
+                });
+            }
+        }
+    </script>
+   
+}
+

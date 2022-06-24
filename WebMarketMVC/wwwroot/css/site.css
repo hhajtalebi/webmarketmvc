@@ -1,0 +1,28 @@
+@font-face {
+    font-family: "Vazirmatn";
+    src: url("/Fonts/Vazirmatn-Regular.woff2") format('woff2');
+    src: url("/Fonts/Vazirmatn-Medium.woff2") format('woff2');
+}
+
+* {
+    font-family: "Vazirmatn";
+}
+html{
+    font-size: 14px;
+    
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
