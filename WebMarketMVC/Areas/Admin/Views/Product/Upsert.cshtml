@@ -20,20 +20,42 @@
                         <label asp-for="Product.CategoryId" class="text-white mt-1"></label>
                     </div>
                     <div class="col-sm-4">
-                        <select class="form-select form-control text-center" asp-for="Product.CategoryId" asp-items="@Model.CategorySelectList">
-                            <option disabled="disabled" selected="selected">---انتخاب دسته---</option>
-                        </select>
-                      
+                        <div class="row">
+                            <div class="col-sm-10">
+                                <select class="form-select form-control text-center" asp-for="Product.CategoryId" asp-items="@Model.CategorySelectList">
+                                    <option disabled="disabled" selected="selected">---انتخاب دسته---</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-2 text-white">
+                                <a class="btn btn-outline-primary bg-white text-dark" asp-area="Admin" asp-controller="Category" asp-action="Create">
+                                    <i class="fas fa-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                       
+
+
                     </div>
 
                     <div class="col-sm-2 text-end">
                         <label asp-for="Product.CoverTypeId" class="text-white mt-1"></label>
                     </div>
+                   
                     <div class="col-sm-4">
-                        <select class="form-select form-control text-center" asp-for="Product.CoverTypeId" asp-items="@Model.CoverTypeSelectList">
-                            <option disabled="disabled" selected="selected">---انتخاب کاور---</option>
-                        </select>
-                       
+                        <div class="row">
+                            <div class="col-sm-10">
+                                <select class="form-select form-control text-center" asp-for="Product.CoverTypeId" asp-items="@Model.CoverTypeSelectList">
+                                    <option disabled="disabled" selected="selected">---انتخاب کاور---</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-2 ">
+                                <a class="btn btn-outline-primary bg-white text-dark" asp-area="Admin" asp-controller="CoverType" asp-action="Create">
+                                    <i class="fas fa-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                        
+
                     </div>
 
                 </div>

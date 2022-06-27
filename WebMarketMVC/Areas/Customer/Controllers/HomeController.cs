@@ -1,33 +1,36 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
-using WebMarketMVC.Models;
+using WebMarket.DataAccess.Services.Interface;
+using WebMarket.Models.ViewModel;
 
 namespace WebMarketMVC.Controllers
 {
     [Area("Customer")]
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+      private readonly IProductService _productService;
 
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
+      public HomeController(IProductService productService)
+      {
+          _productService = productService;
+      }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+      public IActionResult Index()
+      {
+          var product = _productService.GetAll();
 
-        public IActionResult Privacy()
-        {
-            return View();
+            return View(product);
         }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+      [HttpGet]
+      public IActionResult ProductDetails(int id)
+      {
+          ShoppingCartVM shoppingCart = new ShoppingCartVM
+          {
+              Product = _productService.GetFirstOrDefulte(p => p.Id == id),
+              Count = 1
+          };
+          return View(shoppingCart);
+      }
     }
+    
+
 }

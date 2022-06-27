@@ -23,7 +23,7 @@ namespace WebMarketMVC.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-          
+
             return View();
         }
         //[HttpGet]
@@ -57,7 +57,7 @@ namespace WebMarketMVC.Areas.Admin.Controllers
             //    Text = c.Name,
             //    Value = c.Id.ToString()
             //});
-          
+
             if (Id == null || Id == 0)
             {
                 ProductVM productVM = new()
@@ -80,7 +80,7 @@ namespace WebMarketMVC.Areas.Admin.Controllers
 
                 ProductVM productVM = new()
                 {
-                    Product = _db.GetFirstOrDefulte(p=>p.Id==Id),
+                    Product = _db.GetFirstOrDefulte(p => p.Id == Id),
                     CategorySelectList = _categoryService.GetAll()
                         .Select(c => new SelectListItem { Text = c.Name, Value = c.Id.ToString() }),
                     CoverTypeSelectList = _coverTypeService.GetAll()
@@ -90,75 +90,64 @@ namespace WebMarketMVC.Areas.Admin.Controllers
 
             }
 
-            
-           
-           
+
+
+
         }
 
         [HttpPost]
-        public IActionResult Upsert(ProductVM obj,IFormFile? file)
+        public IActionResult Upsert(ProductVM obj, IFormFile? file)
         {
-            if (obj.Product.Id==null||obj.Product.Id==0)
+            string wwwRootPath = _webHostEnvironment.WebRootPath;
+            if (ModelState.IsValid)
             {
-                string wwwRootPath = _webHostEnvironment.WebRootPath;
-                if (ModelState.IsValid)
+                if (file != null)
                 {
-                    ///نام فایل
-                    string filename = Guid.NewGuid().ToString();
-                    ///مسیر آپلود
-                    var uplodes = Path.Combine(wwwRootPath, @"Image/Product");
-                    ///ادامه نام فایل
+                    string fileName = Guid.NewGuid().ToString();
+                    var uploads = Path.Combine(wwwRootPath, @"Image\Product");
                     var extenstion = Path.GetExtension(file.FileName);
 
-                    using (var filestrms = new FileStream(Path.Combine(uplodes, filename + extenstion), FileMode.Create))
+                    if (obj.Product.ImgeUrl != null)
                     {
-                        file.CopyTo(filestrms);
+                        var oldImagePath = Path.Combine(wwwRootPath, obj.Product.ImgeUrl.TrimStart('\\'));
+                        if (System.IO.File.Exists(oldImagePath))
+                        {
+                            System.IO.File.Delete(oldImagePath);
+                        }
                     }
 
-                    obj.Product.ImgeUrl = @"/Image/Product/" + filename + extenstion;
+                    using (var fileStrems = new FileStream(Path.Combine(uploads, fileName + extenstion), FileMode.Create))
+                    {
+                        file.CopyTo(fileStrems);
+                    }
 
+                    obj.Product.ImgeUrl = fileName + extenstion;
+                }
+
+                if (obj.Product.Id == null || obj.Product.Id == 0)
+                {
                     _db.add(obj);
-                    TempData["succsess"] = "محصول  با موفقیت ویرایش  شد";
+                    TempData["success"] = "محصول  با موفقیت ثبت  شد";
 
                     return RedirectToAction("Index");
                 }
-            }
-            else
-            {
-                return View();
+                else
+                {
+                    _db.update(obj.Product);
+                    TempData["edite"] = "محصول  با موفقیت ویرایش  شد";
+                    return RedirectToAction("Index");
+
+                }
             }
             
 
-            return View();
-
-        }
-
-        [HttpGet]
-        public IActionResult Delete(int? Id)
-        {
-            var DeleteProduct = _db.GetFirstOrDefulte(p => p.Id == Id);
-            if (DeleteProduct != null)
-            {
-                return View(DeleteProduct);
-            }
-
-            return NotFound();
-
-        }
-
-        [HttpPost]
-        public IActionResult Delete(int Id)
-        {
-            var DeleteProduct = _db.GetFirstOrDefulte(p => p.Id == Id);
-            if (DeleteProduct != null)
-            {
-                _db.Remove(DeleteProduct);
-                TempData["delete"] = "محصول  با موفقیت حذف  شد";
-                return RedirectToAction("Index");
-            }
 
             return View();
+
         }
+
+       
+       
 
         #region API CALL
 
@@ -167,9 +156,24 @@ namespace WebMarketMVC.Areas.Admin.Controllers
         {
             var productList = _db.GetAll();
             return Json(new { data = productList });
-            
-        }
 
+        }
+        [HttpDelete]
+        public IActionResult Delete(int? id)
+        {
+            var obj = _db.GetFirstOrDefulte(u => u.Id == id);
+            if (obj == null)
+            {
+                return Json(new { success = false, message = "خطا در حذف " });
+            }
+            var oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, obj.ImgeUrl.TrimStart('\\'));
+            if (System.IO.File.Exists(oldImagePath))
+            {
+                System.IO.File.Delete(oldImagePath);
+            }
+            _db.Remove(obj);
+            return Json(new { success = true, message = "حذف موفقیت آمیز بود" });
+        }
 
         #endregion
 

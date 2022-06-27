@@ -1,7 +1,34 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model IEnumerable<WebMarket.Models.Product>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Customer/Views/Shared/_Layout.cshtml";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Customer</h1>
+<div class="card-group" >
+    <div class="row">
+        @foreach (var item in Model)
+        {
+    
+            <div class="col-sm-4 col-md-6 col-lg-4 col-xxl-3 mb-4 " >
+                <div class="card shadow">
+                    <img class="card-img-top" src="~/Image/Product/@item.ImgeUrl" alt="@item.ImageAlt" title="@item.ImageTitle">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">@item.Title</h5>
+                        <hr/>
+                        <p class="card-text">نام نویسنده: <b>@item.Author</b><br />دسته بندی: <b>@item.Category.Name</b></p>
+                        <small class="text-dark">@item.ShortDescription</small>
+                    </div>
+                    <div class="card-footer">
+                        <b class="text-dark">@item.Price.ToString("#,000") تومان</b>
+                        <a asp-area="Customer" asp-controller="Home" asp-action="ProductDetails" asp-route-id="@item.Id" class="btn btn-primary float-end">نمایش جزئیات</a>
+                    </div>
+                </div>
+            </div>
+       
+        }
+    </div>
 </div>
+@section Scripts
+{
+    <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
+}

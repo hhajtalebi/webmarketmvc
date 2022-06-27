@@ -12,7 +12,7 @@ namespace WebMarket.DataAccess.Services.Interface
     public interface IProductService
     {
         public void add(ProductVM Entity);
-        public void update(ProductVM Entity);
+        public void update(Product Entity);
         public void Remove(Product Entity);
         public  void RemoveRenge(Product Entity);
         public IEnumerable<Product> GetAll();

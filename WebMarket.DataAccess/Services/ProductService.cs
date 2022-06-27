@@ -21,26 +21,28 @@ namespace WebMarket.DataAccess.Services
             _db.SaveChanges();
         }
 
-        public void update(ProductVM Entity)
+        public void update(Product Entity)
         {
-            var UpdateProduct = _db.Products.FirstOrDefault(p => p.Id == Entity.Product.Id);
+            var UpdateProduct = _db.Products.FirstOrDefault(p => p.Id == Entity.Id);
             if (UpdateProduct != null)
             {
-                Entity.Product.Title = UpdateProduct.Title;
-                Entity.Product.Description = UpdateProduct.Description;
-                Entity.Product.Price = UpdateProduct.Price;
-                Entity.Product.ShortDescription = UpdateProduct.ShortDescription;
-                Entity.Product.ISBN = UpdateProduct.ISBN;
-                Entity.Product.Author = UpdateProduct.Author;
-                Entity.Product.ListPrice = UpdateProduct.ListPrice;
-                Entity.Product.Price50 = UpdateProduct.Price50;
-                Entity.Product.Price100 = UpdateProduct.Price100;
-                Entity.Product.ImgeUrl = UpdateProduct.ImgeUrl;
-                Entity.Product.ImageTitle = UpdateProduct.ImageTitle;
-                Entity.Product.ImageAlt = UpdateProduct.ImageAlt;
-                Entity.Product.CategoryId = UpdateProduct.CategoryId;
-                Entity.Product.CoverTypeId = UpdateProduct.CoverTypeId;
+                UpdateProduct.Title = Entity.Title;
+                UpdateProduct.Description = Entity.Description;
+                UpdateProduct.Price = Entity.Price;
+                UpdateProduct.ShortDescription = Entity.ShortDescription;
+                UpdateProduct.ISBN = Entity.ISBN;
+                UpdateProduct.Author = Entity.Author;
+                UpdateProduct.ListPrice = Entity.ListPrice;
+                UpdateProduct.Price50 = Entity.Price50;
+                UpdateProduct.Price100 = Entity.Price100;
+                 UpdateProduct.ImgeUrl= Entity.ImgeUrl ;
+                 UpdateProduct.ImageTitle = Entity.ImageTitle;
+                 UpdateProduct.ImageAlt = Entity.ImageAlt;
+                 UpdateProduct.CategoryId = Entity.CategoryId;
+                 UpdateProduct.CoverTypeId = Entity.CoverTypeId;
             }
+
+            _db.SaveChanges();
         }
 
         public void Remove(Product Entity)
