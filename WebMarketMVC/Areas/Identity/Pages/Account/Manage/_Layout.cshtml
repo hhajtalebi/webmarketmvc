@@ -1,0 +1,38 @@
+﻿
+@{
+    if (ViewData.TryGetValue("ParentLayout", out var parentLayout))
+    {
+        Layout = (string)parentLayout;
+    }
+    else
+    {
+        Layout = "/Areas/Identity/Pages/_Layout.cshtml";
+    }
+}
+
+<div class="card shadow" >
+    <div class="card-header bg-dark">
+        <h1 class="text-center text-white">مدیریت کردن حساب کاربری</h1>
+
+    </div>
+    <div class="card-body">
+        
+        <div class="m-0 pb-1">
+           
+        
+            <div class="row">
+                <div class="col-md-3 bg-dark">
+                    <partial name="_ManageNav"/>
+                </div>
+                <div class="col-md-9">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}

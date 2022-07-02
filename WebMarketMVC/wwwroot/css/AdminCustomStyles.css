@@ -221,10 +221,12 @@
 
         .sb-sidenav-dark .sb-sidenav-menu .nav-link:hover {
             color: #fff;
+            background-color: #0d6efd;
         }
 
         .sb-sidenav-dark .sb-sidenav-menu .nav-link.active {
             color: #fff;
+            background-color: #0d6efd;
         }
 
             .sb-sidenav-dark .sb-sidenav-menu .nav-link.active .sb-nav-link-icon {
@@ -258,6 +260,7 @@
 
         .sb-sidenav-light .sb-sidenav-menu .nav-link:hover {
             color: #0d6efd;
+            background-color: #adb5bd;
         }
 
         .sb-sidenav-light .sb-sidenav-menu .nav-link.active {

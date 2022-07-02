@@ -1,0 +1,61 @@
+﻿@model WebMarket.Models.Company
+@{
+}
+
+
+
+<div class="container">
+    <div class="card mx-auto shadow w-75 mt-3">
+        <div class="card-header">
+            <h1 class="text-danger w-75 h5">آیا از حذف شرکت {@Model.Name} اطمینان داردی؟</h1>
+        </div>
+        <form method="post">
+            <div class="card-body">
+                <div class="row p-1">
+                    <div class="col-sm-3">
+                        <label asp-for="Name" class="text-info"></label>
+                    </div>
+                    <div class="col-sm-9">
+                        <input type="text" Asp-for="Name" class="form-control text-center" placeholder="لطفا نام را وارد کنید"/>
+                    </div>
+                </div>
+                <div class="row p-1">
+                    <div class="col-sm-3">
+                        <label asp-for="PhonNumber" class="text-info"></label>
+
+                    </div>
+                    <div class="col-sm-9">
+                        <input type="text" asp-for="PhonNumber" class="form-control text-center" placeholder="لطفا ترتیب را وارد کنید"/>
+                    </div>
+                </div>
+                
+                <div class="row p-1">
+                    <div class="col-sm-3">
+                        <label asp-for="City" class="text-info"></label>
+
+                    </div>
+                    <div class="col-sm-9">
+                        <input type="text" asp-for="City" class="form-control text-center" placeholder="لطفا ترتیب را وارد کنید"/>
+                    </div>
+                </div>
+                
+                <div class="row p-1">
+                    <div class="col-sm-3">
+                        <label asp-for="StreetAddress" class="text-info"></label>
+
+                    </div>
+                    <div class="col-sm-9">
+                        <input type="text" asp-for="StreetAddress" class="form-control text-center" placeholder="لطفا ترتیب را وارد کنید"/>
+                    </div>
+                </div>
+
+            </div>
+            <div class="card-footer">
+                <input type="submit" class="btn btn-outline-danger" value="حذف"/>
+                <a class="text-warning" asp-area="Admin" asp-controller="Company" asp-action="Index"> برگشت به لیست</a>
+            </div>
+
+        </form>
+       
+    </div>
+</div>

@@ -1,0 +1,68 @@
+﻿@model WebMarket.Models.Company
+@{
+}
+
+<div class="container">
+    <div class="card mx-auto shadow w-75">
+        <div class="card-header">
+            <h1 class="text-info w-75">ویرایش شرکت جدید</h1>
+        </div>
+        <form method="post">
+            <input type="hidden" asp-for="Id"/>
+            <div class="card-body">
+                <div class="row p-1">
+                    <div class="col-sm-3">
+                        <label asp-for="Name" class="text-end"></label>
+                    </div>
+                    <div class="col-sm-9">
+                        <input type="text" Asp-for="Name" class="form-control text-center" placeholder="لطفا نام را وارد کنید"/>
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="row p-1">
+                    <div class="col-sm-3">
+                        <label asp-for="PhonNumber" class="text-end"></label>
+
+                    </div>
+                    <div class="col-sm-9">
+                        <input type="number" asp-for="PhonNumber" class="form-control text-center" placeholder="لطفا ترتیب را وارد کنید"/>
+                        <span asp-validation-for="PhonNumber" class="text-danger"></span>
+                    </div>
+                </div>
+                
+                <div class="row p-1">
+                    <div class="col-sm-3">
+                        <label asp-for="City" class="text-end"></label>
+
+                    </div>
+                    <div class="col-sm-9">
+                        <input type="text" asp-for="City" class="form-control text-center" placeholder="لطفا ترتیب را وارد کنید"/>
+                        <span asp-validation-for="City" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="row p-1">
+                    <div class="col-sm-3">
+                        <label asp-for="StreetAddress" class="text-end"></label>
+
+                    </div>
+                    <div class="col-sm-9">
+                        <input type="text" asp-for="StreetAddress" class="form-control text-center" placeholder="لطفا ترتیب را وارد کنید"/>
+                        <span asp-validation-for="StreetAddress" class="text-danger"></span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="card-footer">
+                <input type="submit" class="btn btn-outline-primary" value="ثبت"/>
+                <a class="text-warning" asp-area="Admin" asp-controller="Company" asp-action="Index"> برگشت به لیست</a>
+            </div>
+
+        </form>
+       
+    </div>
+</div>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

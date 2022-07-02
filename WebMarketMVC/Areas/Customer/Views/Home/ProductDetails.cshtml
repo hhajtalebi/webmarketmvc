@@ -7,7 +7,7 @@
 
 <div class="card shadow-lg">
     <div class="row">
-        <aside class="col-4 border-right">
+        <aside class="col-4 col-sm-12 col-md-12 border-right">
             <article class="gallery-wrap">
                 <div class="img-big-wrap">
                     <div class="text-center mt-4 ">
@@ -50,9 +50,16 @@
                 </div>
             
                 <hr>
-                <div class="text-left">
-                    <a href="#" class="btn btn-lg btn-primary text-uppercase"> خرید کتاب </a>
+                <div class="row col-12">
+                    <div class="col-sm-12 col-lg-6 col-xxl-6 pt-2 mb-3">
+                        <label class="text-info" asp-for="Count"></label>
+                        <input class="text-end" type="number" asp-for="Count"/>
+                    </div>
+                    <div class="col-sm-12 col-lg-6 col-xxl-6 text-end">
+                        <a href="#" class="btn btn-lg btn-primary text-uppercase"> خرید کتاب </a>
+                    </div>
                 </div>
+               
             </article>
         </aside> 
     </div> 

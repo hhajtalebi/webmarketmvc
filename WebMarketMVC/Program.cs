@@ -4,8 +4,13 @@ using Microsoft.Extensions.Options;
 using WebMarket.DataAccess.Data;
 using WebMarket.DataAccess.Services;
 using WebMarket.DataAccess.Services.Interface;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using NuGet.Protocol.Plugins;
+using WebMarket.Utility;
 
 var builder = WebApplication.CreateBuilder(args);
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -13,10 +18,16 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(Options => Options.UseSqlServer(
     builder.Configuration.GetConnectionString("WebmarketDb")
 ));
+builder.Services.AddIdentity<IdentityUser,IdentityRole>().AddDefaultTokenProviders().AddDefaultUI()
+    .AddEntityFrameworkStores<ApplicationDbContext>(); ;
 
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICoverTypeService, CoverTypeService>();
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<ICompanyServic,CompanyServic>();
+builder.Services.AddScoped<IEmailSender, EmailSender>();
+builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -31,7 +42,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
+app.MapRazorPages();
 app.UseAuthorization();
 
 app.MapControllerRoute(
