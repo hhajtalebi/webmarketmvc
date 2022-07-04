@@ -118,6 +118,10 @@ namespace WebMarketMVC.Areas.Identity.Pages.Account
             public IEnumerable<SelectListItem> RoleList { get; set; }
 
             public string Role { get; set; }
+
+            public int? CompanyId { get; set; }
+            [ValidateNever]
+            public IEnumerable<SelectListItem> CompanyList { get; set; }
         }
 
 
@@ -139,7 +143,13 @@ namespace WebMarketMVC.Areas.Identity.Pages.Account
                     {
                         Text= u,
                         Value= u
-                    })
+                    }),
+                CompanyList = _companyService.GetAll().Select(c=>new SelectListItem
+                {
+                    Text = c.Name,
+                    Value = c.ToString()
+                })
+
             };
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
@@ -182,8 +192,8 @@ namespace WebMarketMVC.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    await _emailSender.SendEmailAsync(Input.Email, "ایمیل تائید حساب کاربری",
+                        $"لطفا جهت تائید ایمیل<a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>اینجا کلیک کنید</a>.");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
