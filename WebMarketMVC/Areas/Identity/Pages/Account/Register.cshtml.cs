@@ -168,6 +168,10 @@ namespace WebMarketMVC.Areas.Identity.Pages.Account
               user.Address = Input.Address;
               user.FullName = Input.FullName;
               user.Email= Input.Email;
+              if (Input.Role==SD.Role_Company)
+              {
+                  user.CompanyId = Input.CompanyId;
+              }
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
