@@ -53,5 +53,19 @@ namespace WebMarket.DataAccess.Services
            _context.ShoppingCarts.RemoveRange(Entiny);
            _context.SaveChanges();
         }
+
+        public int incrementCatr(ShoppingCart Entiny, int Count)
+        {
+            Entiny.Count += Count;
+            _context.SaveChangesAsync();
+            return Entiny.Count;
+        }
+
+        public int DecrementCatr(ShoppingCart Entiny, int Count)
+        {
+            Entiny.Count -= Count;
+            _context.SaveChangesAsync();
+            return Entiny.Count;
+        }
     }
 }

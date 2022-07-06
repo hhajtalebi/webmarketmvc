@@ -13,5 +13,8 @@ namespace WebMarket.DataAccess.Services.Interface
 
         public void update(ShoppingCart Entiny);
         public  void RemoveRange(IEnumerable<ShoppingCart> Entiny);
+
+        public int incrementCatr(ShoppingCart Entiny,int Count);
+        public int DecrementCatr(ShoppingCart Entiny, int Count);
     }
 }

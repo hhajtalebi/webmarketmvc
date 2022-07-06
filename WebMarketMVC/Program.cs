@@ -29,6 +29,13 @@ builder.Services.AddScoped<IEmailSender, EmailSender>();
 builder.Services.AddScoped<IShoppingCartService, ShoppingCartService>();
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 
+builder.Services.ConfigureApplicationCookie(Options =>
+{
+    Options.LoginPath = $"/Identity/Account/Login";
+    Options.LogoutPath= $"/Identity/Account/Logout";
+    Options.AccessDeniedPath= $"/Identity/Account/AccessDenied";
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
