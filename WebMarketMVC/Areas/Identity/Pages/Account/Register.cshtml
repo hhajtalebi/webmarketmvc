@@ -24,6 +24,7 @@
                                 ----انتخاب نقش-----
                             </option>
                         </select>
+                        <span asp-validation-for="Input.Role"></span>
                     </div>
                     <div class="form-floating m-3">
                         
@@ -32,6 +33,7 @@
                                 ----انتخاب شرکت-----
                             </option>
                         </select>
+                        <span asp-validation-for="Input.CompanyList"></span>
                     </div>
                     <div class="form-floating m-3">
                         <input asp-for="Input.FullName" class="form-control text-end" autocomplete="FullName" aria-required="true" />

@@ -1,5 +1,5 @@
-﻿@using WebMarket.Models.ViewModel
-@model WebMarket.Models.ViewModel.ShoppingCartVM
+﻿
+@model WebMarket.Models.ShoppingCart
 @{
     ViewData["Title"] = "جزییات محصول";
     Layout = "~/Areas/Customer/Views/Shared/_Layout.cshtml";
@@ -20,46 +20,48 @@
         </aside>
         <aside class="col-8">
             <article class="card-body p-5">
-                <div class="text-center">
-                    <h2 class="title mb-3">@Model.Product.Title</h2>
-                </div>
-                <hr />
-                <p class="price-detail-wrap text-left">
-                    <span class="price h5 text-danger">
-                        <span class="currency">با قیمت استثنایی</span>&nbsp;<span class="num">@Model.Product.Price.ToString("#,000")</span>&nbsp;<span class="currency">تومان</span>
-                    </span>
-                </p>
-                <dl class="item-property">
-                    <dt>توضیحات</dt>
-                    <dd>
-                        <p>
-                            @Model.Product.Description
-                        </p>
-                    </dd>
-                </dl>
-                <div class="text-warning">
-                                    <dl class="param param-feature">
-                    <dt>شماره شابک: <b class="text-bold text-dark">@Model.Product.ISBN</b></dt>
-                </dl>
-                <dl class="param param-feature">
-                    <dt>نام نویسنده: <b class="text-bold text-dark">@Model.Product.Author</b></dt>
-                </dl>
-                <dl class="param param-feature">
-                    <dt>آخرین بروزرسانی: <b class="text-bold text-dark">@Model.Product.CreateDate.ToShortDateString()</b></dt>
-                </dl>  
-                </div>
-            
-                <hr>
-                <div class="row col-12">
-                    <div class="col-sm-12 col-lg-6 col-xxl-6 pt-2 mb-3">
-                        <label class="text-info" asp-for="Count"></label>
-                        <input class="text-end" type="number" asp-for="Count"/>
+                <form method="post">
+                    <input type="hidden" asp-for="ProductId"/>
+                    <div class="text-center">
+                        <h2 class="title mb-3">@Model.Product.Title</h2>
                     </div>
-                    <div class="col-sm-12 col-lg-6 col-xxl-6 text-end">
-                        <a href="#" class="btn btn-lg btn-primary text-uppercase"> خرید کتاب </a>
+                    <hr/>
+                    <p class="price-detail-wrap text-left">
+                        <span class="price h5 text-danger">
+                            <span class="currency">با قیمت استثنایی</span>&nbsp;<span class="num">@Model.Product.Price.ToString("#,000")</span>&nbsp;<span class="currency">تومان</span>
+                        </span>
+                    </p>
+                    <dl class="item-property">
+                        <dt>توضیحات</dt>
+                        <dd>
+                            <p>
+                                @Model.Product.Description
+                            </p>
+                        </dd>
+                    </dl>
+                    <div class="text-warning">
+                        <dl class="param param-feature">
+                            <dt>شماره شابک: <b class="text-bold text-dark">@Model.Product.ISBN</b></dt>
+                        </dl>
+                        <dl class="param param-feature">
+                            <dt>نام نویسنده: <b class="text-bold text-dark">@Model.Product.Author</b></dt>
+                        </dl>
+                        <dl class="param param-feature">
+                            <dt>آخرین بروزرسانی: <b class="text-bold text-dark">@Model.Product.CreateDate.ToShortDateString()</b></dt>
+                        </dl>
                     </div>
-                </div>
-               
+
+                    <hr>
+                    <div class="row col-12">
+                        <div class="col-sm-12 col-lg-6 col-xxl-6 pt-2 mb-3">
+                            <label class="text-info" asp-for="Count"></label>
+                            <input class="text-end" type="number" asp-for="Count"/>
+                        </div>
+                        <div class="col-sm-12 col-lg-6 col-xxl-6 text-end">
+                            <button type="submit" class="btn btn-lg btn-primary text-uppercase"> خرید کتاب </button>
+                        </div>
+                    </div>
+                </form>
             </article>
         </aside> 
     </div> 
