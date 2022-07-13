@@ -19,5 +19,7 @@ namespace WebMarket.Models
         [Range(1,1000,ErrorMessage = "لطفا تعداد را بین 1 تا 1000 عدد انتخاب کنید")]
         public int Count { get; set; }
 
+        public double Price { get; set; }
+
     }
 }

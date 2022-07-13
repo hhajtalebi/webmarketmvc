@@ -20,8 +20,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.Office.Interop.Outlook" Version="15.0.4797.1004" />
-    <PackageReference Include="Microsoft.Office365.OutlookServices" Version="1.0.41" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WebMarket.DataAccess\WebMarket.DataAccess.csproj" />
   </ItemGroup>
 
 </Project>

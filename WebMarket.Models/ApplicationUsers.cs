@@ -21,5 +21,11 @@ namespace WebMarket.Models
         [ForeignKey("CompanyId")]
         [ValidateNever]
         public Company company { get; set; }
+        [Display(Name = "تلفن")]
+        public override string PhoneNumber
+        {
+            get{return base.PhoneNumber; }
+            set { base.PhoneNumber = value; }
+        }
     }
 }

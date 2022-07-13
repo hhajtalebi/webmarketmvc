@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
+using Microsoft.AspNetCore.Identity;
 using WebMarket.DataAccess.Data;
 using WebMarket.DataAccess.Services.Interface;
 using WebMarket.Models;
@@ -9,21 +10,22 @@ namespace WebMarket.DataAccess.Services
     public class ShoppingCartService : IShoppingCartService
     {
         private readonly ApplicationDbContext _context;
-        public ShoppingCartService(ApplicationDbContext db)
+
+
+        public ShoppingCartService(ApplicationDbContext context)
         {
-            _context = db;
+            _context = context;
         }
 
-       
         public void add(ShoppingCart entity)
         {
             _context.ShoppingCarts.Add(entity);
             _context.SaveChangesAsync();
         }
         
-        public IEnumerable<ShoppingCart> GetAll()
+        public IEnumerable<ShoppingCart> GetAll(string id)
         {
-            IEnumerable<ShoppingCart> query = _context.ShoppingCarts.Include(c => c.ApplicationUsers)
+            IEnumerable<ShoppingCart> query = _context.ShoppingCarts.Where(c => c.ApplicationUserId==id)
                 .Include(p => p.Product);
             return query;
         }

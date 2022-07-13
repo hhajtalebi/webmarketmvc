@@ -10,10 +10,14 @@ namespace WebMarket.Models.ViewModel
 {
     public class ProductVM
     {
+        public string NameUser { get; set; }
         public Product Product { get; set; }
         [ValidateNever]
         public IEnumerable<SelectListItem> CategorySelectList { get; set; }
         [ValidateNever]
         public IEnumerable<SelectListItem> CoverTypeSelectList { get; set; }
+
+        public List<Product> listProduct { get; set; }
+
     }
 }

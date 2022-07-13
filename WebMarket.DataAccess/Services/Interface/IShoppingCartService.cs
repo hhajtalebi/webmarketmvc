@@ -7,7 +7,7 @@ namespace WebMarket.DataAccess.Services.Interface
     {
         public void add(ShoppingCart Entiny);
 
-        public IEnumerable<ShoppingCart> GetAll();
+        public IEnumerable<ShoppingCart> GetAll(string id);
         public ShoppingCart GetfirstOrDefaulte(Expression<Func<ShoppingCart, bool>> filter);
         public void remove(ShoppingCart Entiny);
 

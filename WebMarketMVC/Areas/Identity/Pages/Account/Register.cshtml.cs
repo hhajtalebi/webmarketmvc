@@ -134,20 +134,20 @@ namespace WebMarketMVC.Areas.Identity.Pages.Account
                 _roleManager.CreateAsync(new IdentityRole(SD.Role_Employe)).GetAwaiter().GetResult();
                 _roleManager.CreateAsync(new IdentityRole(SD.Role_User)).GetAwaiter().GetResult();
             }
-            
+
             ReturnUrl = returnUrl;
             Input = new InputModel()
             {
                 RoleList = _roleManager.Roles.Select(x => x.Name)
                     .Select(u => new SelectListItem
                     {
-                        Text= u,
-                        Value= u
+                        Text = u,
+                        Value = u
                     }),
-                CompanyList = _companyService.GetAll().Select(c=>new SelectListItem
+                CompanyList = _companyService.GetAll().Select(c => new SelectListItem
                 {
                     Text = c.Name,
-                    Value = c.ToString()
+                    Value = c.Id.ToString()
                 })
 
             };
@@ -163,22 +163,22 @@ namespace WebMarketMVC.Areas.Identity.Pages.Account
                 var user = CreateUser();
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
-              ////  await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+                ////  await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
 
-              user.Address = Input.Address;
-              user.FullName = Input.FullName;
-              user.Email= Input.Email;
-              if (Input.Role==SD.Role_Company)
-              {
-                  user.CompanyId = Input.CompanyId;
-              }
+                user.Address = Input.Address;
+                user.FullName = Input.FullName;
+                user.Email = Input.Email;
+                if (Input.Role == SD.Role_Company)
+                {
+                    user.CompanyId = Input.CompanyId;
+                }
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    if (Input.Role==null)
+                    if (Input.Role == null)
                     {
                         await _userManager.AddToRoleAsync(user, SD.Role_User);
                     }

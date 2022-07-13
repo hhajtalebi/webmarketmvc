@@ -247,7 +247,7 @@ namespace WebMarket.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("WebMarket.Models.Company", b =>
@@ -273,7 +273,7 @@ namespace WebMarket.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Companies");
+                    b.ToTable("Companies", (string)null);
                 });
 
             modelBuilder.Entity("WebMarket.Models.CoverType", b =>
@@ -290,7 +290,7 @@ namespace WebMarket.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CoverTypes");
+                    b.ToTable("CoverTypes", (string)null);
                 });
 
             modelBuilder.Entity("WebMarket.Models.OrderDetails", b =>
@@ -319,7 +319,7 @@ namespace WebMarket.DataAccess.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("OrderDetails");
+                    b.ToTable("OrderDetails", (string)null);
                 });
 
             modelBuilder.Entity("WebMarket.Models.OrderHeader", b =>
@@ -392,7 +392,7 @@ namespace WebMarket.DataAccess.Migrations
 
                     b.HasIndex("ApplicationUserId");
 
-                    b.ToTable("OrderHeaders");
+                    b.ToTable("OrderHeaders", (string)null);
                 });
 
             modelBuilder.Entity("WebMarket.Models.Product", b =>
@@ -467,7 +467,7 @@ namespace WebMarket.DataAccess.Migrations
 
                     b.HasIndex("CoverTypeId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("WebMarket.Models.ShoppingCart", b =>
@@ -485,6 +485,9 @@ namespace WebMarket.DataAccess.Migrations
                     b.Property<int>("Count")
                         .HasColumnType("int");
 
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
@@ -494,7 +497,7 @@ namespace WebMarket.DataAccess.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ShoppingCarts");
+                    b.ToTable("ShoppingCarts", (string)null);
                 });
 
             modelBuilder.Entity("WebMarket.Models.ApplicationUsers", b =>

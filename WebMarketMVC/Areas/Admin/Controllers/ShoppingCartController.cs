@@ -1,11 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using WebMarket.DataAccess.Data;
 using WebMarket.DataAccess.Services.Interface;
 using WebMarket.Models;
+using WebMarket.Models.ViewModel;
 
 namespace WebMarketMVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class ShoppingCartController : Controller
     {
         private readonly IShoppingCartService _db;
@@ -18,72 +22,21 @@ namespace WebMarketMVC.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<ShoppingCart> shoppingCarts = _db.GetAll();
-            return View(shoppingCarts);
-        }
-        [HttpGet]
-        public IActionResult Create()
-        {
-            return View();
-        }
+            var ClaimIdentity = (ClaimsIdentity)User.Identity;
+            var Claim = ClaimIdentity.FindFirst(ClaimTypes.NameIdentifier).ToString();
 
-        [HttpPost]
-        public IActionResult Create(ShoppingCart obj)
-        {
-            
-
-
-            if (ModelState.IsValid)
+            ShoppingCartVM shoppingCartVm = new ShoppingCartVM()
             {
-              
-                _db.add(obj);
-                TempData["success"] = "سبد خرید جدید با موفقیت ایجاد شد";
-                return RedirectToAction("Index");
-            }
-
-
-            return View(obj);
-        }
-
-        /// <summary>
-        /// Get
-       
-        public IActionResult Edite(int? Id)
-        {
-            if (Id==null||Id==0)
-            {
-                return NotFound();
-            }
-
-            var categoryfromdbfrist = _db.GetfirstOrDefaulte(u => u.Id == Id);
-            if (categoryfromdbfrist==null)
-            {
-                return NotFound();
-            }
-
-            return View(categoryfromdbfrist);
-        }
-
-        [HttpPost]
-        public IActionResult Edite(ShoppingCart obj)
-        {
-           
-
-            if (ModelState.IsValid)
-            {
-                _db.update(obj);
-                TempData["edite"] = "سبد خرید با موفقیت ویرایش  شد";
-                return RedirectToAction("Index");
-            }
-
-            return View(obj);
+                ListCarts = _db.GetAll(Claim)
+            };
+            return View(shoppingCartVm);
         }
 
 
         //Get
         public IActionResult Delete(int? Id)
         {
-            if (Id==null||Id==0)
+            if (Id == null || Id == 0)
             {
                 return NotFound();
             }
@@ -100,7 +53,7 @@ namespace WebMarketMVC.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Delete(int Id)
         {
-            if (Id==0)
+            if (Id == 0)
             {
                 return NotFound();
             }

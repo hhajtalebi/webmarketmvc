@@ -32,7 +32,9 @@ namespace WebMarketMVC.Controllers
             {
                 Product = _productService.GetFirstOrDefulte(p => p.Id == productId),
                 ProductId = productId,
-                Count = 1
+                Count = 1,
+                Price =_productService.GetFirstOrDefulte(p=>p.Id==productId).Price
+                
             };
             return View(shoppingCart);
         }
@@ -44,11 +46,13 @@ namespace WebMarketMVC.Controllers
             var claimIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimIdentity.FindFirst(ClaimTypes.NameIdentifier);
             Cart.ApplicationUserId = claim.Value;
-
+         
+           
             ShoppingCart shoppingCartfromDbCart = _shoppingCartService.GetfirstOrDefaulte(c =>
                 c.ApplicationUserId == claim.Value && c.ProductId == Cart.ProductId);
             if (shoppingCartfromDbCart==null)
             {
+              
                 _shoppingCartService.add(Cart);
             }
             else
